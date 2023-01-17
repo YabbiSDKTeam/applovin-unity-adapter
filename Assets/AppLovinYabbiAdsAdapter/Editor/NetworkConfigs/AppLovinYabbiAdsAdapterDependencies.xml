@@ -1,0 +1,11 @@
+<dependencies>
+    <androidPackages>
+        <androidPackage spec='me.yabbi.ads.adapters:applovin:+'/>
+        <repositories>
+            <repository>https://mobileadx.ru/maven</repository>
+        </repositories>
+    </androidPackages>
+    <iosPods>
+        <iosPod name='AppLovinMediationYabbiAdsCustomAdapter' minTargetSdk='12.0'/>
+    </iosPods>
+</dependencies>

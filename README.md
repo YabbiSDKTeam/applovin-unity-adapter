@@ -1,39 +1,38 @@
 # Адаптер Yabbi для AppLovin
 
-## Шаг 1. Установка SDK
+## Установка SDK AppLovin
 Установите **AppLovin Unity Plugin** следуя официальной  [документации](https://dash.applovin.com/documentation/mediation/unity/getting-started/integration).
 
-Для добавления рекламной сети **YabbiAds** следуйте инструкции по добавлению кастомной рекламной сети - [клик](https://dash.applovin.com/documentation/mediation/android/mediation-setup/custom-sdk)
+## Установка адаптера YabbiAds
+Загрузите **AppLovinYabbiAdsAdapter**. Он включает в себя последнии версии Android и iOS Yabbi SDK.  
+Версию для скачивания вы можете найти по ссылке - [клик](https://github.com/YabbiSDKTeam/applovin-unity-adapter/releases).
 
+## Настройка External Dependency Manager
 
-Для добавления адаптера **YabbiAds** следуйте иснтрукциям ниже:
-1. Перейдите в файл **Dependencies.xml** расположенный в папке **Assets/MaxSdk/AppLovin/Editor/Dependencies.xml**.
-2. Добавьте зависимость в файл.
+External Dependency Manager уже включен в плагин.
+Для разрешения конфликтов зависимостей в вашем приложении выполните следующие шаги:
 
+1. После импорта плагина в редакторе Unity выберите File → Build Settings → Android.
+2. Добавьте флаг Custom Gradle Template для Unity 2018.4 - Unity 2019.2 версий или Custom Main Gradle Template для Unity 2019.3 или выше (Build Settings → Player Settings → Publishing settings).
+3. Добавьте флаг Custom Launcher Gradle Template (Build Settings → Player Settings → Publishing settings).
+4. Включите настройку - "Patch mainTemplate.gradle" (Assets → External Dependency Manager → Android Resolver → Settings).
+5. Включите настройку - "Use Jetifier" (Assets → External Dependency Manager → Android Resolver → Settings).
+6. Добавьте следующий код в launcherTemplate.gradle
+```gradle
+android {
+   
+    // другие настройки
+        
+    defaultConfig {
+        
+        // другие настройки
+          
+        multiDexEnabled true
+    }
+}
 ```
-<?xml version="1.0" encoding="utf-8"?>
-<dependencies>
-    <androidPackages>
-    
-       <!-- Другие зависимости AppLovin -->
-       
-        <!-- Добавьте зависимость -->
-        <androidPackage spec='me.yabbi.ads.adapters:applovin+'/>
-        
-        <!-- Добавьте репозиторий для зависимости -->
-        <repositories>
-            <repository>https://mobileadx.ru/maven</repository>
-        </repositories>
-        
-    </androidPackages>
-    <iosPods>
-    
-        <!-- Другие зависимости AppLovin -->
-        
-    </iosPods>
-</dependencies>
-
-```
+7. Затем выберите Assets → External Dependency Manager → Android Resolver и нажмите Resolve или Force Resolve.
+8. Модули, которые необходимы для работы будут импортированы в mainTemplate.gradle вашего проекта.
 
 
 **YabbiAds** поддерживает 2 типа рекламы
